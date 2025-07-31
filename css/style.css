@@ -129,7 +129,21 @@ section:nth-child(even){
 .header .navbar a:hover{
     color:red;
 }
-
+.admin-panel{
+  background-color: #444;
+  color: #f5f5f5 !important;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-family: sans-serif;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s ease;
+}
+.admin-panel:hover{
+    background-color: #f5f5f5;
+    color: #444 !important;
+}
 #Login{
     background-color: #16a085;
     color: #444;
