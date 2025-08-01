@@ -52,7 +52,6 @@ if(isset($_POST['submit'])){
         <a href="./news.php">news</a>
         <a href="admin/admin.php" class="admin-panel">admin panel</a>
         <a href="./login.php" class="log-in-button">Login</a>
-        <a href="./register.php" id="Register">Register</a>
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>

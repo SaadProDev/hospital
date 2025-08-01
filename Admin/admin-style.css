@@ -80,3 +80,11 @@ header {
   border-radius: 8px;
   color: #444;
 }
+a{
+  text-decoration: none;
+  color: white;
+}
+h2:hover{
+  cursor: pointer;
+  color: white;
+}
