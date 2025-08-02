@@ -1,5 +1,10 @@
 <?php
 include("../db.php");
+
+// Fetch cities from the database
+$cityQuery = "SELECT * FROM cities";
+$cityResult = mysqli_query($conn, $cityQuery);
+
 if (isset($_POST['btn'])) {
     $FullName = $_POST['FullName'];
     $username = $_POST['UserName'];
@@ -8,7 +13,7 @@ if (isset($_POST['btn'])) {
     $Phone = $_POST['Phone'];
     $Spec = $_POST['speciality'];
     $Profile = $_POST['Profile'];
-    $city_id = $_POST['city_id'];
+    $city_name = $_POST['city_name'];  // Now selected from dropdown dynamically
 
     $pfp = $_FILES['imgupld']['name'];
     $type = strtolower($_FILES['imgupld']['type']);
@@ -16,25 +21,16 @@ if (isset($_POST['btn'])) {
     $size = $_FILES['imgupld']['size'];
     $folder = "../upload/" . $pfp;
 
-    $role_id = 2;
-
+    // Check for duplicate username in users table
     $checkUser = "SELECT * FROM users WHERE username = '$username'";
     $userExists = mysqli_query($conn, $checkUser);
 
+    // Check for duplicate email in doctors table
     $checkEmail = "SELECT * FROM doctors WHERE email = '$Email'";
     $emailExists = mysqli_query($conn, $checkEmail);
 
-    if (mysqli_num_rows($userExists) > 0) {
-        echo "<script>
-    alert('Username already exists. Please choose another one.')
-</script>";
-        exit;
-    }
-
-    if (mysqli_num_rows($emailExists) > 0) {
-        echo "<script>
-    alert('Username already exists. Please choose another one.')
-</script>";
+    if (mysqli_num_rows($userExists) > 0 || mysqli_num_rows($emailExists) > 0) {
+        echo "<script>alert('Username or Email already exists. Please choose another.');</script>";
         exit;
     }
 
@@ -42,14 +38,12 @@ if (isset($_POST['btn'])) {
 
     if (in_array($type, $allowedTypes)) {
         if ($size <= 4000000) {
-            $userInsert = "INSERT INTO users(username, password, role_id) VALUES ('$username', '$password', $role_id)";
+            $userInsert = "INSERT INTO users(username, password, role) VALUES ('$username', '$password', 'Doctor')";
             $userRun = mysqli_query($conn, $userInsert);
 
             if ($userRun) {
-                $user_id = mysqli_insert_id($conn);
-
-                $insert = "INSERT INTO doctors(user_id, full_name, email, phone, specialist, profile, city_id, ProfilePhoto)
-                           VALUES ($user_id, '$FullName', '$Email', '$Phone', '$Spec', '$Profile', $city_id, '$pfp')";
+                $insert = "INSERT INTO doctors(username, full_name, email, phone, specialist, profile_description, city, profile_photo)
+                           VALUES ('$username', '$FullName', '$Email', '$Phone', '$Spec', '$Profile', '$city_name', '$pfp')";
 
                 $run = mysqli_query($conn, $insert);
 
@@ -70,8 +64,6 @@ if (isset($_POST['btn'])) {
     }
 }
 ?>
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -95,13 +87,7 @@ if (isset($_POST['btn'])) {
         <li><a href="#">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="#">View Patients</a></li>
-        <li><a href="#">Modify Cities</a></li>
-        <li><a href="#">Modify Doctor Details</a></li>
-        <li><a href="#">Modify Patient Details</a></li>
-        <li><a href="#">Delete Cities</a></li>
-        <li><a href="#">Delete Doctors</a></li>
-        <li><a href="#">Delete Patients</a></li>
-        <li><a href="#">Manage Logins</a></li>
+        <!-- Sidebar options -->
       </ul>
     </aside>
 
@@ -110,7 +96,7 @@ if (isset($_POST['btn'])) {
 
     <form method="POST" enctype="multipart/form-data">
       <div class="text-center mb-4">
-        <img src="<?php echo $folder ?>" class="profile-img" alt="Profile Photo">
+        <img src="" class="profile-img" alt="Profile Photo"><br>
         <label class="form-label">Profile Photo</label><br>
             <input type="file" name="imgupld" required><br><br>
       </div>
@@ -121,7 +107,6 @@ if (isset($_POST['btn'])) {
       <label class="form-label">Username</label>
             <input type="text" class="form-control" name="UserName" required>
 
-
        <label class="form-label">Password</label>
             <input type="password" class="form-control" name="Password" required>
 
@@ -131,13 +116,13 @@ if (isset($_POST['btn'])) {
       <label class="form-label">Phone</label>
             <input type="text" class="form-control" name="Phone" required>
 
-       <label for="city_id" class="form-label">City</label>
-       <select class="form-select" name="city_id" id="city_id" required>
-                <option value="" disabled selected>Select your city</option>
-                <option value="1">Lahore</option>
-                <option value="2">Karachi</option>
-                <option value="3">Islamabad</option>
-            </select> 
+       <label for="city_name" class="form-label">City</label>
+       <select class="form-select" name="city_name" id="city_name" required>
+            <option value="" disabled selected>Select your city</option>
+            <?php while($city = mysqli_fetch_assoc($cityResult)) { ?>
+                <option value="<?php echo $city['city_name']; ?>"><?php echo $city['city_name']; ?></option>
+            <?php } ?>
+        </select> 
 
       <div class="mb-3">
         <label class="form-label">Specialist</label>
@@ -156,7 +141,7 @@ if (isset($_POST['btn'])) {
             </select>
       </div>
 
-      <<label class="form-label mt-3">Profile</label>
+      <label class="form-label mt-3">Profile</label>
             <textarea class="form-control" name="Profile" rows="4" required></textarea>
 
       <button type="submit" name="btn" class="btn btn-primary w-100">Add Doctor</button>
@@ -166,4 +151,3 @@ if (isset($_POST['btn'])) {
 
 </body>
 </html>
-

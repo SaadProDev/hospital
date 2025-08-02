@@ -1,6 +1,6 @@
 <?php 
 
-    $conn = mysqli_connect("localhost","root","","care_database");
+    $conn = mysqli_connect("localhost","root","","hospital");
 
     if(!$conn){
         echo "Connection Failed";

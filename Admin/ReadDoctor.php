@@ -9,8 +9,7 @@
   <link rel="stylesheet" href="admin-style.css">
   <link rel="stylesheet" href="RDoc.css">
   <style>
-    
-    
+    /* You can add custom CSS here if needed */
   </style>
 </head>
 <body>
@@ -42,33 +41,33 @@
       <div class="content-area">
         <div class="row">
           <?php
-            @include("../db.php");
+            include("../db.php");
             $slc = "SELECT * FROM doctors";
             $run = mysqli_query($conn, $slc);
 
             while($arr = mysqli_fetch_assoc($run)){ ?>
-              <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
-                <div class="card h-100 text-center">
-                  <img src="../upload/<?php echo $arr['ProfilePhoto'] ?>" 
-                      onerror="this.onerror=null;this.src='default.jpg';" 
-                      class="doctor-img" 
-                      alt="Doctor Image">
-                  <div class="card-body">
-                    <h5 class="card-title"><?php echo $arr['full_name'] ?></h5>
-                    <p class="card-text"><?php echo $arr['specialist'] ?></p>
-                    <p class="card-text"><?php echo $arr['phone'] ?></p>
-                    <p class="card-text"><?php echo $arr['email'] ?></p>
-                    <p class="card-text"><?php echo $arr['profile'] ?></p>
-                    <a href="EditDoctors.php?id=<?php echo $arr['doctor_id']?>" class="btn btn-primary mt-2">Update</a>
-                    <a href="DeleteDoctors.php?id=<?php echo $arr['doctor_id']?>" class="btn btn-danger mt-2 ms-2">Delete</a>
-                  </div>
-                </div>
-              </div>
+              <div class="card h-100 text-center d-flex flex-column justify-content-center align-items-center">
+  <img src="../upload/<?php echo $arr['profile_photo'] ?>" 
+       onerror="this.onerror=null;this.src='default.jpg';" 
+       class="doctor-img mb-3" 
+       alt="Doctor Image">
+  <div class="card-body d-flex flex-column justify-content-center align-items-center">
+    <h5 class="card-title"><?php echo $arr['full_name'] ?></h5>
+    <p class="card-text"><?php echo $arr['specialist'] ?></p>
+    <p class="card-text"><?php echo $arr['phone'] ?></p>
+    <p class="card-text"><?php echo $arr['email'] ?></p>
+    <p class="card-text"><?php echo $arr['profile_description'] ?></p>
+    <div>
+      <a href="UpdateDoctor.php?id=<?php echo $arr['username']?>" class="btn btn-primary mt-2">Update</a>
+      <a href="DeleteDoctor.php?id=<?php echo $arr['username']?>" class="btn btn-danger mt-2 ms-2" onclick="return confirm('Are you sure?')">Delete</a>
+    </div>
+  </div>
+</div>
+
           <?php } ?>
         </div>
       </div>
     </div>
   </div>
 </body>
-
 </html>
