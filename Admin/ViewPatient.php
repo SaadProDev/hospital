@@ -52,16 +52,10 @@ include("../db.php");
       <ul>
         <li><a href="./AddCity.php">Add Cities</a></li>
         <li><a href="./adddoctor.php">Add Doctors</a></li>
-        <li><a href="./AddPatient.php">Add Patients</a></li>
-        <li><a href="#">View Cities</a></li>
+        <li><a href="./AddPatients.php">Add Patients</a></li>
+        <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
-        <li><a href="./ViewPatients.php">View Patients</a></li>
-        <li><a href="#">Modify Cities</a></li>
-        <li><a href="#">Modify Doctor Details</a></li>
-        <li><a href="#">Modify Patient Details</a></li>
-        <li><a href="#">Delete Cities</a></li>
-        <li><a href="#">Delete Doctors</a></li>
-        <li><a href="#">Delete Patients</a></li>
+        <li><a href="./ViewPatient.php">View Patients</a></li>
         <li><a href="#">Manage Logins</a></li>
       </ul>
     </aside>

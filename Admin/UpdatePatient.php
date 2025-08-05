@@ -121,10 +121,11 @@ if (isset($_POST['btn'])) {
       <ul>
         <li><a href="./AddCity.php">Add Cities</a></li>
         <li><a href="./adddoctor.php">Add Doctors</a></li>
-        <li><a href="./AddPatient.php">Add Patients</a></li>
-        <li><a href="#">View Cities</a></li>
+        <li><a href="./AddPatients.php">Add Patients</a></li>
+        <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
-        <li><a href="./ViewPatients.php">View Patients</a></li>
+        <li><a href="./ViewPatient.php">View Patients</a></li>
+        <li><a href="#">Manage Logins</a></li>
       </ul>
     </aside>
 

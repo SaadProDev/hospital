@@ -39,13 +39,13 @@ $run = mysqli_query($conn, $fetchCities);
     <aside class="sidebar">
       <a href="./Admin.php"><h2>Admin Panel</h2></a>
       <ul>
-        <li><a href="./AddCities.php">Add Cities</a></li>
+        <li><a href="./AddCity.php">Add Cities</a></li>
         <li><a href="./adddoctor.php">Add Doctors</a></li>
-        <li><a href="#">Add Patients</a></li>
-        <li><a href="./ViewCities.php">View Cities</a></li>
+        <li><a href="./AddPatients.php">Add Patients</a></li>
+        <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
-        <li><a href="#">View Patients</a></li>
-        <!-- other options -->
+        <li><a href="./ViewPatient.php">View Patients</a></li>
+        <li><a href="#">Manage Logins</a></li>
       </ul>
     </aside>
 
