@@ -1,4 +1,4 @@
-<style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -133,3 +133,72 @@
       text-decoration: none;
       font-weight: 500;
     }
+    /* Ensure proper box sizing and margin reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Make the card responsive */
+.card {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Stack header elements */
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* Make form fields stretch full width */
+.form-group {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Input and select responsiveness */
+.input-wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.input-wrapper input,
+.input-wrapper select {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Toggle button alignment */
+.toggle-password {
+  margin-left: 8px;
+}
+
+/* Submit button full width */
+.submit-btn {
+  width: 100%;
+}
+
+/* Responsive spacing for smaller screens */
+@media (max-width: 480px) {
+  .card {
+    padding: 15px;
+  }
+
+  .form-label {
+    font-size: 0.95rem;
+  }
+
+  .submit-btn {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .footer-text {
+    font-size: 0.9rem;
+  }
+}

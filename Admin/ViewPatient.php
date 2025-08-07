@@ -85,7 +85,7 @@ include("../db.php");
                     <p class="card-text"><?php echo $arr['city'] ?></p>
                     <div>
                       <a href="UpdatePatient.php?id=<?php echo $arr['username']?>" class="btn btn-primary mt-2">Update</a>
-                      <a href="DeletePatient.php?id=<?php echo $arr['username']?>" class="btn btn-danger mt-2 ms-2" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
+                      <a href="DeletePatients.php?id=<?php echo $arr['username']?>" class="btn btn-danger mt-2 ms-2" onclick="return confirm('Are you sure you want to delete this patient?')">Delete</a>
                     </div>
                   </div>
                 </div>
