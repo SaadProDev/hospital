@@ -1,4 +1,5 @@
-<?php
+<?php 
+echo"working"
 session_start();
 include("db.php");
 
