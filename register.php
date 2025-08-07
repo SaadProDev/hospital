@@ -1,3 +1,8 @@
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,7 +37,7 @@
       <div class="card-title">Create Account</div>
       <div class="card-description">Fill in your details to sign up</div>
     </div>
-    <form onsubmit="handleRegister(event)">
+    <form action="login.php">
       <!-- Name Field -->
       <div class="form-group">
         <label for="name" class="form-label">Full Name</label>
@@ -72,7 +77,7 @@
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="submit-btn">Register</button>
+      <button type="submit" class="submit-btn"><a href="./login.php">register</a></button>
 
       <!-- Footer -->
       <div class="footer-text">
