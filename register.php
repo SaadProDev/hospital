@@ -1,4 +1,59 @@
 
+php
+Copy
+Edit
+<?php
+// DB Connection
+$conn = new mysqli("localhost", "root", "", "your_database_name");
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+// Create (from form)
+if (isset($_POST['create'])) {
+    $full_name = $_POST['full_name'];
+    $username = $_POST['username'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $city = $_POST['city'];
+    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    $profile_photo = "";
+
+    if (isset($_FILES['profile_photo'])) {
+        $profile_photo = time() . "_" . basename($_FILES['profile_photo']['name']);
+        move_uploaded_file($_FILES['profile_photo']['tmp_name'], "uploads/" . $profile_photo);
+    }
+
+    $stmt = $conn->prepare("INSERT INTO users (full_name, username, email, phone, city, password, profile_photo) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $full_name, $username, $email, $phone, $city, $password, $profile_photo);
+    $stmt->execute();
+    header("Location: crud.php");
+    exit;
+}
+
+// Delete
+if (isset($_GET['delete'])) {
+    $id = $_GET['delete'];
+    $conn->query("DELETE FROM users WHERE id=$id");
+    header("Location: crud.php");
+    exit;
+}
+
+// Update
+if (isset($_POST['update'])) {
+    $id = $_POST['id'];
+    $full_name = $_POST['full_name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $city = $_POST['city'];
+
+    $stmt = $conn->prepare("UPDATE users SET full_name=?, email=?, phone=?, city=? WHERE id=?");
+    $stmt->bind_param("ssssi", $full_name, $email, $phone, $city, $id);
+    $stmt->execute();
+    header("Location: crud.php");
+    exit;
+}
+?>
 
 
 
