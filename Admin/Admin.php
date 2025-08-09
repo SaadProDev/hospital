@@ -1,3 +1,17 @@
+<?php
+
+  session_start();
+include("../db.php");
+
+// ✅ Only admin can access
+if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
+    header("Location: ../login.php");
+    exit();
+}
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +34,6 @@
         <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="./ViewPatient.php">View Patients</a></li>
-        <li><a href="#">Manage Logins</a></li>
       </ul>
     </aside>
 

@@ -1,6 +1,12 @@
 <?php
+session_start();
 include("../db.php");
 
+// ✅ Only admin can access
+if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
+    header("Location: ../login.php");
+    exit();
+}
 if (isset($_GET['id'])) {
     $current_username = $_GET['id'];
 
@@ -17,10 +23,11 @@ if (isset($_GET['id'])) {
 
 if (isset($_POST['btn'])) {
     $new_username = $_POST['UserName'];
-    $FullName = $_POST['FullName'];
-    $Email = $_POST['Email'];
-    $Phone = $_POST['Phone'];
-    $City = $_POST['city_name'];
+    $FullName     = $_POST['FullName'];
+    $Email        = $_POST['Email'];
+    $Phone        = $_POST['Phone'];
+    $City         = $_POST['city_name'];
+    $Password     = $_POST['Password']; // New password
 
     // Check for duplicate username in users (excluding current)
     $checkUser = "SELECT * FROM users WHERE username = '$new_username' AND username != '$current_username'";
@@ -33,11 +40,11 @@ if (isset($_POST['btn'])) {
 
     // Handle profile photo upload (optional)
     if (!empty($_FILES['imgupld']['name'])) {
-        $pfp = $_FILES['imgupld']['name'];
+        $pfp      = $_FILES['imgupld']['name'];
         $tmp_name = $_FILES['imgupld']['tmp_name'];
-        $type = strtolower($_FILES['imgupld']['type']);
-        $size = $_FILES['imgupld']['size'];
-        $folder = "../upload/" . $pfp;
+        $type     = strtolower($_FILES['imgupld']['type']);
+        $size     = $_FILES['imgupld']['size'];
+        $folder   = "../upload/" . $pfp;
 
         $allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
@@ -71,10 +78,14 @@ if (isset($_POST['btn'])) {
             WHERE username = '$current_username'";
     }
 
-    // Update Users Table Username
-    $updateUser = "UPDATE users SET username = '$new_username' WHERE username = '$current_username'";
+    // Update Users Table
+    if (!empty($Password)) {
+        $updateUser = "UPDATE users SET username = '$new_username', password = '$Password' WHERE username = '$current_username'";
+    } else {
+        $updateUser = "UPDATE users SET username = '$new_username' WHERE username = '$current_username'";
+    }
 
-    $runUser = mysqli_query($conn, $updateUser);
+    $runUser    = mysqli_query($conn, $updateUser);
     $runPatient = mysqli_query($conn, $updatePatient);
 
     if ($runUser && $runPatient) {
@@ -84,7 +95,6 @@ if (isset($_POST['btn'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,6 +156,9 @@ if (isset($_POST['btn'])) {
         <label class="form-label">Username</label>
         <input type="text" class="form-control" name="UserName" value="<?php echo $patient['username']; ?>" required>
 
+        <label class="form-label">Password <small>(Leave blank to keep existing)</small></label>
+        <input type="password" class="form-control" name="Password">
+
         <label class="form-label">Email</label>
         <input type="email" class="form-control" name="Email" value="<?php echo $patient['email']; ?>" required>
 
@@ -153,7 +166,15 @@ if (isset($_POST['btn'])) {
         <input type="text" class="form-control" name="Phone" value="<?php echo $patient['phone']; ?>" required>
 
         <label class="form-label">City</label>
-        <input type="text" class="form-control" name="city_name" value="<?php echo $patient['city']; ?>" required>
+<select name="city_name" class="form-control" required>
+    <option value="" disabled>Select your city</option>
+    <option value="Abbottabad" <?php if($patient['city'] == 'Abbottabad') echo 'selected'; ?>>Abbottabad</option>
+    <option value="Bahawalpur" <?php if($patient['city'] == 'Bahawalpur') echo 'selected'; ?>>Bahawalpur</option>
+    <option value="Karachi" <?php if($patient['city'] == 'Karachi') echo 'selected'; ?>>Karachi</option>
+    <option value="Lahore" <?php if($patient['city'] == 'Lahore') echo 'selected'; ?>>Lahore</option>
+    <option value="Multan" <?php if($patient['city'] == 'Multan') echo 'selected'; ?>>Multan</option>
+</select>
+
 
         <button type="submit" name="btn" class="btn btn-primary w-100 mt-4">Update Patient</button>
       </form>

@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <!-- custom css file link  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 <body>
@@ -25,22 +25,22 @@
 <!-- header section starts  -->
 
 <header class="header">
-
-    <a href="./index.php" class="logo"> <i class="fas fa-heartbeat"></i> <strong>CARE</strong>medical </a>
+    <a href="./index.php" class="logo">
+        <i class="fas fa-user"></i>
+        <strong>CARE</strong>medical - Patient
+    </a>
 
     <nav class="navbar">
-        <a href="./index.php">home</a>
-        <a href="./about.php">about</a>
-        <a href="./doctors.php">doctors</a>
-        <a href="./appointment.php">appointment</a>
-        <a href="./news.php">news</a>
-        <!-- <a href="admin/admin.php" class="admin-panel">admin panel</a> -->
-        <a href="./login.php" class="log-in-button">Login</a>
+        <a href="./index.php">Home</a>
+        <a href="./appointment.php">Book Appointment</a>
+        <a href="./appointment_status.php">Appointments Status</a>
+        <a href="./docprofile.php">Profile</a>
+        <a href="./logout.php" class="btn btn-danger" onclick="return confirm('Logout?')">Logout</a>
     </nav>
 
     <div id="menu-btn" class="fas fa-bars"></div>
-
 </header>
+
 
 
 <!-- header section ends -->
@@ -60,7 +60,7 @@
         while($arr = mysqli_fetch_assoc($run)){ ?>
 
             <div class="box">
-            <img src="./upload/<?php echo $arr['profile_photo'] ?>" 
+            <img src="../upload/<?php echo $arr['profile_photo'] ?>" 
        onerror="this.onerror=null;this.src='upload\download (1).jpeg';"  
        alt="Doctor Image">
             <h3><?php echo $arr['full_name'] ?></h3>

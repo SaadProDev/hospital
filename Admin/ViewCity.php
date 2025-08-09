@@ -1,6 +1,12 @@
 <?php
+session_start();
 include("../db.php");
 
+// ✅ Only admin can access
+if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
+    header("Location: ../login.php");
+    exit();
+}
 $fetchCities = "SELECT * FROM cities";
 $run = mysqli_query($conn, $fetchCities);
 ?>

@@ -1,26 +1,3 @@
-<?php
-
-// $conn = mysqli_connect('localhost','root','',database: 'contact_db') or die('connection failed');
-
-if(isset($_POST['submit'])){
-
-   $name = mysqli_real_escape_string($conn, $_POST['name']);
-   $email = mysqli_real_escape_string($conn, $_POST['email']);
-   $number = $_POST['number'];
-   $date = $_POST['date'];
-
-   $insert = mysqli_query($conn, "INSERT INTO `contact_form`(name, email, number, date) VALUES('$name','$email','$number','$date')") or die('query failed');
-
-   if($insert){
-      $message[] = 'appointment made successfully!';
-   }else{
-      $message[] = 'appointment failed';
-   }
-
-}
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +27,7 @@ if(isset($_POST['submit'])){
         <a href="./doctors.php">doctors</a>
         <a href="./appointment.php">appointment</a>
         <a href="./news.php">news</a>
-        <a href="admin/admin.php" class="admin-panel">admin panel</a>
+        <!-- <a href="admin/admin.php" class="admin-panel">admin panel</a> -->
         <a href="./login.php" class="log-in-button">Login</a>
     </nav>
 

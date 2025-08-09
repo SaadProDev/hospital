@@ -157,3 +157,13 @@
       text-decoration: none;
       font-weight: 500;
     }
+    .error-message {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 500;
+    border: 1px solid #f5c6cb;
+}

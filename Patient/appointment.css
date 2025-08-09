@@ -1,0 +1,383 @@
+/* Appointment Form Container */
+.appointment .box-container {
+    background: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    max-width: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Heading */
+.appointment h3 {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* Input / Select Styling */
+.appointment .box {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.appointment .box:focus {
+    border-color: #16a085;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(22,160,133,0.3);
+}
+
+/* Buttons */
+.appointment .btn {
+    background: #16a085;
+    color: #fff;
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.appointment .btn:hover {
+    background: #138d75;
+}
+
+/* Success / Error Messages */
+.appointment p {
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.appointment p[style*="green"] {
+    background-color: rgba(22,160,133,0.1);
+    color: #16a085;
+}
+
+.appointment p[style*="red"] {
+    background-color: rgba(231,76,60,0.1);
+    color: #e74c3c;
+}
+/* Bigger Input / Select Styling */
+.appointment .box {
+    width: 100%;
+    padding: 16px 18px;   /* more padding for height */
+    font-size: 1.1rem;    /* bigger text */
+    border-radius: 10px;  /* slightly rounder */
+    border: 1px solid #ddd;
+    outline: none;
+    transition: all 0.3s ease;
+    background-color: #f9f9f9;
+}
+
+.appointment .box:focus {
+    border-color: #16a085;
+    background: #fff;
+    box-shadow: 0 0 8px rgba(22,160,133,0.3);
+}
+
+/* Bigger Buttons */
+.appointment .btn {
+    background: #16a085;
+    color: #fff;
+    padding: 16px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.appointment .btn:hover {
+    background: #138d75;
+}
+/* Appointment Form Container */
+.appointment .box-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    max-width: 550px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Form Heading */
+.appointment h3 {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+/* Bigger Inputs / Selects */
+.appointment .box {
+    width: 100%;
+    padding: 20px;         /* taller input */
+    font-size: 1.2rem;     /* bigger text */
+    border-radius: 12px;   /* rounder edges */
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.03);
+}
+
+.appointment .box:focus {
+    border-color: #16a085;
+    background: #fff;
+    box-shadow: 0 0 10px rgba(22,160,133,0.3);
+}
+
+/* Bigger Buttons */
+.appointment .btn {
+    background: #16a085;
+    color: #fff;
+    padding: 18px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+/* FORM CONTAINER - Card Style */
+.appointment .box-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border-top: 5px solid #16a085;
+}
+
+/* FORM HEADING */
+.appointment h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+/* FIELD GROUP WITH ICON */
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    color: #16a085;
+}
+
+.appointment .box {
+    width: 100%;
+    padding: 18px 18px 18px 45px; /* left padding for icon */
+    font-size: 1.2rem;
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.appointment .box:focus {
+    border-color: #16a085;
+    background: #fff;
+    box-shadow: 0 0 12px rgba(22,160,133,0.25);
+}
+
+/* BIG BUTTON */
+.appointment .btn {
+    background: linear-gradient(135deg, #16a085, #1abc9c);
+    color: #fff;
+    padding: 20px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.appointment .btn:hover {
+    background: linear-gradient(135deg, #138d75, #17a589);
+    box-shadow: 0 8px 18px rgba(19,141,117,0.3);
+    transform: translateY(-2px);
+}
+
+/* SUCCESS / ERROR MESSAGE STYLES */
+.appointment p {
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 1.05rem;
+}
+
+.appointment p[style*="green"] {
+    background-color: rgba(22,160,133,0.12);
+    color: #16a085;
+    border-left: 4px solid #16a085;
+}
+
+.appointment p[style*="red"] {
+    background-color: rgba(231,76,60,0.12);
+    color: #e74c3c;
+    border-left: 4px solid #e74c3c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .appointment .box-container {
+        padding: 25px;
+    }
+    .appointment h3 {
+        font-size: 1.6rem;
+    }
+    .appointment .box {
+        font-size: 1rem;
+        padding: 15px 15px 15px 40px;
+    }
+    .appointment .btn {
+        font-size: 1.1rem;
+        padding: 16px;
+    }
+}
+/* FORM CONTAINER */
+.appointment .box-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    border-top: 6px solid #16a085;
+}
+
+/* FORM HEADING */
+.appointment h3 {
+    text-align: center;
+    font-size: 2.2rem; /* bigger heading */
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* FIELD GROUP WITH ICON */
+.input-group {
+    position: relative;
+}
+
+.input-group i {
+    position: absolute;
+    top: 50%;
+    left: 18px;
+    transform: translateY(-50%);
+    font-size: 1.5rem; /* bigger icon */
+    color: #16a085;
+}
+
+/* BIGGER INPUTS */
+.appointment .box {
+    width: 100%;
+    padding: 22px 20px 22px 55px; /* more padding for size */
+    font-size: 1.3rem;            /* bigger text */
+    border-radius: 15px;
+    border: 1px solid #ccc;
+    outline: none;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.appointment .box:focus {
+    border-color: #16a085;
+    background: #fff;
+    box-shadow: 0 0 14px rgba(22,160,133,0.25);
+}
+
+/* HUGE BUTTON */
+.appointment .btn {
+    background: linear-gradient(135deg, #16a085, #1abc9c);
+    color: #fff;
+    padding: 22px;
+    font-size: 1.4rem;    /* bigger text */
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.appointment .btn:hover {
+    background: linear-gradient(135deg, #138d75, #17a589);
+    box-shadow: 0 8px 20px rgba(19,141,117,0.3);
+    transform: translateY(-2px);
+}
+
+/* SUCCESS / ERROR MESSAGES */
+.appointment p {
+    padding: 16px;
+    border-radius: 10px;
+    font-size: 1.2rem; /* bigger message text */
+}
+
+.appointment p[style*="green"] {
+    background-color: rgba(22,160,133,0.12);
+    color: #16a085;
+    border-left: 5px solid #16a085;
+}
+
+.appointment p[style*="red"] {
+    background-color: rgba(231,76,60,0.12);
+    color: #e74c3c;
+    border-left: 5px solid #e74c3c;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .appointment .box-container {
+        padding: 25px;
+    }
+    .appointment h3 {
+        font-size: 1.8rem;
+    }
+    .appointment .box {
+        font-size: 1.15rem;
+        padding: 18px 18px 18px 50px;
+    }
+    .appointment .btn {
+        font-size: 1.2rem;
+        padding: 18px;
+    }
+}
+
