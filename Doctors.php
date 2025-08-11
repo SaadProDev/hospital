@@ -52,34 +52,30 @@
     <h1 class="heading" style="margin-top:100px;"> our <span>doctors</span> </h1>
 
     <div class="box-container">
-        <?php
-        include("./db.php");
-        $slc = "SELECT * FROM doctors";
-        $run = mysqli_query($conn,$slc);
+    <?php
+    include("./db.php");
+    $slc = "SELECT * FROM doctors";
+    $run = mysqli_query($conn, $slc);
 
-        while($arr = mysqli_fetch_assoc($run)){ ?>
-
-            <div class="box">
-            <img src="./upload/<?php echo $arr['profile_photo'] ?>" 
-       onerror="this.onerror=null;this.src='upload\download (1).jpeg';"  
-       alt="Doctor Image">
-            <h3><?php echo $arr['full_name'] ?></h3>
-            <span><?php echo $arr['specialist'] ?></span>
+    while ($arr = mysqli_fetch_assoc($run)) { ?>
+        <div class="box">
+            <a href="doctor/docreview.php?un=<?php echo $arr['username']; ?>">
+                <img src="./upload/<?php echo $arr['profile_photo']; ?>" 
+                     onerror="this.onerror=null;this.src='upload/download (1).jpeg';"  
+                     alt="Doctor Image">
+            </a>
+            <h3><?php echo $arr['full_name']; ?></h3>
+            <span><?php echo $arr['specialist']; ?></span>
             <div class="share">
-            <a href="#" class="fab fa-facebook-f"></a>
+                <a href="#" class="fab fa-facebook-f"></a>
                 <a href="#" class="fab fa-twitter"></a>
                 <a href="#" class="fab fa-instagram"></a>
                 <a href="#" class="fab fa-linkedin"></a>
-                
             </div>
         </div>
-<?php
-        }
-        
-        ?>
+    <?php } ?>
+</div>
 
-        
-    </div>
 
 </section>
 
