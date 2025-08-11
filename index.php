@@ -95,7 +95,7 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="download (1).jpeg" alt="">
+            <img src="image/jahangir.jpg" alt="">
             <h3>Jahangir Ali</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
