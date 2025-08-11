@@ -113,11 +113,11 @@
 
         <div class="box">
             <h3>appointment info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +8801688238801 </a>
-            <a href="#"> <i class="fas fa-phone"></i> +8801782546978 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> wincoder9@gmail.com </a>
-            <a href="#"> <i class="fas fa-envelope"></i> sujoncse26@gmail.com </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> sylhet, bangladesh </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> Datadrifters01@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> driftersdata@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Karachi, Pakistan </a>
         </div>
 
         <div class="box">

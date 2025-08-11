@@ -112,9 +112,9 @@ $patient_city = $patient['city'] ?? "Unknown City";
 
         <div class="box">
             <h3>contact info</h3>
-            <a href="#"><i class="fas fa-phone"></i> +8801688238801 </a>
+            <a href="#"><i class="fas fa-phone"></i> +923071338783 </a>
             <a href="#"><i class="fas fa-envelope"></i> support@caremedical.com </a>
-            <a href="#"><i class="fas fa-map-marker-alt"></i> sylhet, bangladesh </a>
+            <a href="#"><i class="fas fa-map-marker-alt"></i> karachi, Pakistan </a>
         </div>
     </div>
     <div class="credit"> created by <span>Data Drifters</span></div>
