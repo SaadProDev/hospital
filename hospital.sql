@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 02, 2025 at 12:07 PM
+-- Generation Time: Aug 09, 2025 at 11:56 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -31,10 +31,21 @@ CREATE TABLE `appointments` (
   `appointment_id` int(11) NOT NULL,
   `doctor_username` varchar(50) DEFAULT NULL,
   `patient_username` varchar(50) DEFAULT NULL,
-  `appointment_date` date DEFAULT NULL,
+  `appointment_day` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') NOT NULL,
   `appointment_time` time DEFAULT NULL,
   `status` varchar(50) DEFAULT 'Pending'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `appointments`
+--
+
+INSERT INTO `appointments` (`appointment_id`, `doctor_username`, `patient_username`, `appointment_day`, `appointment_time`, `status`) VALUES
+(2, 'SaadMustafa', 'SaadMustafa', 'Monday', '13:00:00', 'Accepted'),
+(3, 'SaadMustafa', 'SaadMustafa', 'Wednesday', '15:30:00', 'Accepted'),
+(4, 'SaadMustafa', 'g', 'Monday', '11:30:00', 'Rejected'),
+(5, 'SaadMustafa', 'g', 'Friday', '12:00:00', 'Accepted'),
+(6, 'SaadMustafa', 'g', 'Monday', '16:00:00', 'Accepted');
 
 -- --------------------------------------------------------
 
@@ -52,7 +63,7 @@ CREATE TABLE `cities` (
 --
 
 INSERT INTO `cities` (`city_id`, `city_name`) VALUES
-(3, 'Karachi');
+(4, 'Karachi');
 
 -- --------------------------------------------------------
 
@@ -83,9 +94,15 @@ CREATE TABLE `doctors` (
   `profile_description` text DEFAULT NULL,
   `profile_photo` varchar(255) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `password` varchar(100) NOT NULL
+  `username` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `doctors`
+--
+
+INSERT INTO `doctors` (`doctor_id`, `full_name`, `email`, `phone`, `specialist`, `profile_description`, `profile_photo`, `city`, `username`) VALUES
+(3, 'Saad Mustafa', 'saad@gmail.com', '+922222222222', 'Cardiologist', 'Saad', 'images.jpeg', 'Karachi', 'Saad');
 
 -- --------------------------------------------------------
 
@@ -94,11 +111,24 @@ CREATE TABLE `doctors` (
 --
 
 CREATE TABLE `doctor_availability` (
-  `availability_id` int(11) NOT NULL,
-  `doctor_username` varchar(50) DEFAULT NULL,
-  `available_date` date DEFAULT NULL,
-  `time_slot` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `id` int(11) NOT NULL,
+  `doctor_username` varchar(50) NOT NULL,
+  `day_of_week` enum('Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday') NOT NULL,
+  `start_time` time NOT NULL,
+  `end_time` time NOT NULL
+) ;
+
+--
+-- Dumping data for table `doctor_availability`
+--
+
+INSERT INTO `doctor_availability` (`id`, `doctor_username`, `day_of_week`, `start_time`, `end_time`) VALUES
+(16, 'SaadMustafa', 'Monday', '09:00:00', '17:00:00'),
+(19, 'SaadMustafa', 'Tuesday', '12:00:00', '20:00:00'),
+(17, 'SaadMustafa', 'Wednesday', '09:00:00', '17:00:00'),
+(20, 'SaadMustafa', 'Thursday', '12:00:00', '20:00:00'),
+(18, 'SaadMustafa', 'Friday', '09:00:00', '17:00:00'),
+(21, 'SaadMustafa', 'Saturday', '12:00:00', '20:00:00');
 
 -- --------------------------------------------------------
 
@@ -126,7 +156,6 @@ CREATE TABLE `patients` (
   `phone` varchar(20) DEFAULT NULL,
   `city` varchar(100) DEFAULT NULL,
   `username` varchar(50) DEFAULT NULL,
-  `password` varchar(100) DEFAULT NULL,
   `profile_photo` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -134,8 +163,8 @@ CREATE TABLE `patients` (
 -- Dumping data for table `patients`
 --
 
-INSERT INTO `patients` (`patient_id`, `full_name`, `email`, `phone`, `city`, `username`, `password`, `profile_photo`) VALUES
-(1, 'Mustafa', 'saad@gmail.com', '+922222222222', 'Karachi', 'Mustafa', NULL, 'download (1).jpeg');
+INSERT INTO `patients` (`patient_id`, `full_name`, `email`, `phone`, `city`, `username`, `profile_photo`) VALUES
+(5, 'n', 'nn@gmail.com', '9999', 'Bahawalpur', 'n', 'download (1).jpeg');
 
 -- --------------------------------------------------------
 
@@ -155,7 +184,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `password`, `role`) VALUES
-(2, 'Mustafa', 'saad', 'Patient');
+(1, 'Admin', 'Admin123', 'Admin'),
+(7, 'Saad', 'Saad', 'Doctor'),
+(8, 'n', 'n', 'Patient');
 
 --
 -- Indexes for dumped tables
@@ -190,7 +221,10 @@ ALTER TABLE `doctors`
 -- Indexes for table `doctor_availability`
 --
 ALTER TABLE `doctor_availability`
-  ADD PRIMARY KEY (`availability_id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_availability` (`doctor_username`,`day_of_week`,`start_time`,`end_time`),
+  ADD KEY `idx_doctor_username` (`doctor_username`),
+  ADD KEY `idx_day_of_week` (`day_of_week`);
 
 --
 -- Indexes for table `medical_news`
@@ -220,13 +254,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `appointments`
 --
 ALTER TABLE `appointments`
-  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `appointment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `cities`
 --
 ALTER TABLE `cities`
-  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `city_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `diseases`
@@ -238,13 +272,13 @@ ALTER TABLE `diseases`
 -- AUTO_INCREMENT for table `doctors`
 --
 ALTER TABLE `doctors`
-  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `doctor_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `doctor_availability`
 --
 ALTER TABLE `doctor_availability`
-  MODIFY `availability_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `medical_news`
@@ -256,13 +290,13 @@ ALTER TABLE `medical_news`
 -- AUTO_INCREMENT for table `patients`
 --
 ALTER TABLE `patients`
-  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `patient_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
