@@ -109,7 +109,7 @@ if (isset($_POST['book']) && !empty($selectedTime)) {
         <a href="./index.php">Home</a>
         <a href="./appointment.php">Book Appointment</a>
         <a href="./appointment_status.php">Appointment Status</a>
-        <a href="./docprofile.php">Profile</a>
+        <!-- <a href="./docprofile.php">Profile</a> -->
         <a href="./logout.php" class="btn btn-danger" onclick="return confirm('Logout?')">Logout</a>
     </nav>
 
