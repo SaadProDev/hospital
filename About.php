@@ -96,44 +96,44 @@ Our mission is to improve lives through compassionate care, clinical excellence,
 
         <div class="box">
             <i class="fas fa-notes-medical"></i>
-            <h3>free checkups</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>Free Checkups</h3>
+            <p>Get a complete health check-up absolutely free for a healthier tomorrow</p>
+            <a href="#" class="btn"> Learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-ambulance"></i>
-            <h3>24/7 ambulance</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>24/7 Ambulance</h3>
+            <p>24/7 ambulance service — ready anytime for your emergency needs</p>
+            <a href="#" class="btn"> Learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-user-md"></i>
-            <h3>expert doctors</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>Expert Doctors</h3>
+            <p>Expert doctors available round-the-clock to care for you</p>
+            <a href="#" class="btn"> Learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-pills"></i>
-            <h3>medicines</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>Medicines</h3>
+            <p>Quality medicines available to support your speedy recovery</p>
+            <a href="#" class="btn"> Learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-procedures"></i>
-            <h3>bed facility</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>Bed Facility</h3>
+            <p>Comfortable and well-equipped beds for patient care and recovery</p>
+            <a href="#" class="btn"> Learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
         <div class="box">
             <i class="fas fa-heartbeat"></i>
-            <h3>total care</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad, omnis.</p>
-            <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
+            <h3>Total Care</h3>
+            <p>Providing total care for your health, comfort, and well-being</p>
+            <a href="#" class="btn"> Learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 
     </div>
@@ -170,11 +170,11 @@ Our mission is to improve lives through compassionate care, clinical excellence,
 
         <div class="box">
             <h3>appointment info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +8801688238801 </a>
-            <a href="#"> <i class="fas fa-phone"></i> +8801782546978 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> wincoder9@gmail.com </a>
-            <a href="#"> <i class="fas fa-envelope"></i> sujoncse26@gmail.com </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> sylhet, bangladesh </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> Datadrifters01@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> driftersdata@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Karachi, Pakistan </a>
         </div>
 
         <div class="box">
