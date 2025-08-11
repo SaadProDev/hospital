@@ -95,7 +95,7 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="download (1).jpeg" alt="">
+            <img src="image/jahangir.jpg" alt="">
             <h3>Jahangir Ali</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
@@ -108,7 +108,7 @@
         </div>
 
         <div class="box">
-            <img src="image/pic-1.jpg" alt="">
+            <img src="upload/images.jpeg" alt="">
             <h3>Saad Mustafa</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
