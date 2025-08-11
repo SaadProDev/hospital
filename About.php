@@ -74,8 +74,9 @@ if(isset($_POST['submit'])){
 
         <div class="content">
             <h3>take the world's best quality treatment</h3>
-            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure ducimus, quod ex cupiditate ullam in assumenda maiores et culpa odit tempora ipsam qui, quisquam quis facere iste fuga, minus nesciunt.</p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Natus vero ipsam laborum porro voluptates voluptatibus a nihil temporibus deserunt vel?</p>
+            <p>At CARE Medical we are committed to delivering exceptional, patient-centered care supported by advanced medical technology and a team of leading healthcare professionals.
+Our mission is to improve lives through compassionate care, clinical excellence, and continuous innovation.</p>
+            <p>With a legacy of trust and a focus on quality, we serve our community with integrity, respect, and dedication to health and well-being</p>
             <a href="#" class="btn"> learn more <span class="fas fa-chevron-right"></span> </a>
         </div>
 

@@ -16,7 +16,7 @@ if (isset($_POST['create'])) { // Matches button name in HTML
     $type = strtolower($_FILES['profile_photo']['type']);
     $tmp_name = $_FILES['profile_photo']['tmp_name'];
     $size = $_FILES['profile_photo']['size'];
-    $folder = "../upload/" . $pfp;
+    $folder = "./upload/" . $pfp;
 
     // Check if username already exists
     $checkUser = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");

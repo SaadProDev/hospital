@@ -95,8 +95,8 @@
     <div class="box-container">
 
         <div class="box">
-            <img src="image/pic-1.jpg" alt="">
-            <h3>win coder</h3>
+            <img src="download (1).jpeg" alt="">
+            <h3>Jahangir Ali</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -104,12 +104,12 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
+            <p class="text">We are extremely pleased with the hospital website developed by DATA DRIFTERS. The design is clean, modern, and optimized for both patients and medical staff. Key features like online appointment booking and doctor profiles were implemented seamlessly</p>
         </div>
 
         <div class="box">
             <img src="image/pic-1.jpg" alt="">
-            <h3>win coder</h3>
+            <h3>Saad Mustafa</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -117,12 +117,12 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
+            <p class="text">DATA DRIFTERS delivered a sophisticated, secure, and fully responsive website that meets the complex needs of our hospital. Their expertise in healthcare UX and compliance was evident throughout the project. Core features like appointment booking and medical staff </p>
         </div>
 
         <div class="box">
             <img src="image/pic-1.jpg" alt="">
-            <h3>win coder</h3>
+            <h3>Musawar Ali</h3>
             <div class="stars">
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star"></i>
@@ -130,7 +130,7 @@
                 <i class="fas fa-star"></i>
                 <i class="fas fa-star-half-alt"></i>
             </div>
-            <p class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam sapiente nihil aperiam? Repellat sequi nisi aliquid perspiciatis libero nobis rem numquam nesciunt alias sapiente minus voluptatem, reiciendis consequuntur optio dolorem!</p>
+            <p class="text">The website developed by DATA DRIFTERS is secure, intuitive, and tailored to our hospital’s unique needs. Their expertise in healthcare compliance and functionality was exceptional. We’ve seen a clear improvement in both operational efficiency and patient engagement</p>
         </div>
 
     </div>
@@ -167,11 +167,11 @@
 
         <div class="box">
             <h3>appointment info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +8801688238801 </a>
-            <a href="#"> <i class="fas fa-phone"></i> +8801782546978 </a>
-            <a href="#"> <i class="fas fa-envelope"></i> wincoder9@gmail.com </a>
-            <a href="#"> <i class="fas fa-envelope"></i> sujoncse26@gmail.com </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> sylhet, bangladesh </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> Datadrifters01@gmail.com </a>
+            <a href="#"> <i class="fas fa-envelope"></i> driftersdata@gmail.com </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Karachi, Pakistan </a>
         </div>
 
         <div class="box">
