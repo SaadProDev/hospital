@@ -42,7 +42,7 @@ $run = mysqli_query($conn, $fetchCities);
 </head>
 <body>
   <div class="admin-container">
-    <aside class="sidebar">
+   <aside class="sidebar">
       <a href="./Admin.php"><h2>Admin Panel</h2></a>
       <ul>
         <li><a href="./AddCity.php">Add Cities</a></li>
@@ -51,7 +51,7 @@ $run = mysqli_query($conn, $fetchCities);
         <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="./ViewPatient.php">View Patients</a></li>
-        <li><a href="#">Manage Logins</a></li>
+        <li><a href="./logout.php">Logout</a></li>
       </ul>
     </aside>
 

@@ -138,8 +138,9 @@ if (isset($_POST['btn'])) {
         <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="./ViewPatient.php">View Patients</a></li>
-        <li><a href="#">Manage Logins</a></li>
+        <li><a href="./logout.php">Logout</a></li>
       </ul>
+    </aside>
     </aside>
 
     <div class="main-content">

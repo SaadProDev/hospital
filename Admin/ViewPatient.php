@@ -62,7 +62,7 @@ if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
         <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="./ViewPatient.php">View Patients</a></li>
-        <li><a href="#">Manage Logins</a></li>
+        <li><a href="./logout.php">Logout</a></li>
       </ul>
     </aside>
 
@@ -80,7 +80,7 @@ if (!isset($_SESSION['role']) || strtolower($_SESSION['role']) !== 'admin') {
             while($arr = mysqli_fetch_assoc($run)){ ?>
               <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
                 <div class="card h-100 text-center d-flex flex-column justify-content-center align-items-center">
-                  <img src="../upload/<?php echo $arr['profile_photo'] ?>" 
+                  <img src="../upload/download (1).jpeg" 
                       onerror="this.onerror=null;this.src='default.jpg';" 
                       class="doctor-img mb-3" 
                       alt="Patient Image">
