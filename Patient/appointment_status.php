@@ -9,6 +9,7 @@ if (!isset($_SESSION['username'])) {
 
 $current_username = $_SESSION['username'];
 
+// 1️⃣ Get all appointments for this patient
 $appointments = mysqli_query($conn, "SELECT * FROM appointments WHERE patient_username = '$current_username'");
 
 ?>
@@ -131,7 +132,7 @@ h1{
 
 <?php while ($appt = mysqli_fetch_assoc($appointments)): ?>
     <?php
-    
+    // 2️⃣ Get doctor details for each appointment
     $doc_username = $appt['doctor_username'];
     $doc_query = mysqli_query($conn, "SELECT full_name, specialist FROM doctors WHERE username = '$doc_username'");
     $doc = mysqli_fetch_assoc($doc_query);
