@@ -53,7 +53,7 @@ $patient_city = $patient['city'] ?? "Unknown City";
 <!-- home section -->
 <section class="home" id="home">
     <div class="image">
-        <img src="../upload/downlod (1).jpeg" 
+        <img src="../upload/download (1).jpeg" 
              alt="<?php echo htmlspecialchars($patient_name); ?>" 
              style="width: 60%; height: 60%; object-fit: cover; border-radius: 50%;">
     </div>
