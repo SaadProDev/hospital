@@ -190,9 +190,9 @@ if ($doctor_result && mysqli_num_rows($doctor_result) > 0) {
 
         <div class="box">
             <h3>contact info</h3>
-            <a href="#"> <i class="fas fa-phone"></i> +8801688238801 </a>
+            <a href="#"> <i class="fas fa-phone"></i> +923071338783 </a>
             <a href="#"> <i class="fas fa-envelope"></i> support@caremedical.com </a>
-            <a href="#"> <i class="fas fa-map-marker-alt"></i> sylhet, bangladesh </a>
+            <a href="#"> <i class="fas fa-map-marker-alt"></i> Karachi, Pakistan </a>
         </div>
 
     </div>
