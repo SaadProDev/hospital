@@ -11,6 +11,13 @@ if (isset($_POST['create'])) { // Matches button name in HTML
     $Phone = $_POST['phone'];
     $city_name = $_POST['city'];
 
+    // File upload variables
+    $pfp = $_FILES['profile_photo']['name'];
+    $type = strtolower($_FILES['profile_photo']['type']);
+    $tmp_name = $_FILES['profile_photo']['tmp_name'];
+    $size = $_FILES['profile_photo']['size'];
+    $folder = "./upload/" . $pfp;
+
     // Check if username already exists
     $checkUser = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username'");
     // Check if email already exists in patients
@@ -19,28 +26,43 @@ if (isset($_POST['create'])) { // Matches button name in HTML
     if (mysqli_num_rows($checkUser) > 0 || mysqli_num_rows($checkEmail) > 0) {
         echo "<script>alert('Username or Email already exists. Please choose another.');</script>";
     } else {
-        // Insert into users table
-        $userInsert = "INSERT INTO users(username, password, role) 
-                       VALUES ('$username', '$password', 'Patient')";
-        $userRun = mysqli_query($conn, $userInsert);
+        // Allowed image types
+        $allowedTypes = ['image/jpg', 'image/jpeg', 'image/png'];
 
-        if ($userRun) {
-            // Insert into patients table (no profile_photo column now)
-            $insert = "INSERT INTO patients(username, full_name, email, phone, city)
-                       VALUES ('$username', '$FullName', '$Email', '$Phone', '$city_name')";
-            $run = mysqli_query($conn, $insert);
+        if (in_array($type, $allowedTypes)) {
+            if ($size <= 4000000) { // 4MB limit
+                // Insert into users table
+                $userInsert = "INSERT INTO users(username, password, role) 
+                               VALUES ('$username', '$password', 'Patient')";
+                $userRun = mysqli_query($conn, $userInsert);
 
-            if ($run) {
-                echo "<script>alert('Registration successful! You can now log in.'); window.location.href='login.php';</script>";
+                if ($userRun) {
+                    // Insert into patients table
+                    $insert = "INSERT INTO patients(username, full_name, email, phone, city, profile_photo)
+                               VALUES ('$username', '$FullName', '$Email', '$Phone', '$city_name', '$pfp')";
+                    $run = mysqli_query($conn, $insert);
+
+                    if ($run) {
+                        move_uploaded_file($tmp_name, $folder);
+                        echo "<script>alert('Registration successful! You can now log in.'); window.location.href='login.php';</script>";
+                    } else {
+                        echo "<div class='alert alert-danger mt-3'>Error adding patient: " . mysqli_error($conn) . "</div>";
+                    }
+                } else {
+                    echo "<div class='alert alert-danger mt-3'>Error creating user account: " . mysqli_error($conn) . "</div>";
+                }
             } else {
-                echo "<div class='alert alert-danger mt-3'>Error adding patient: " . mysqli_error($conn) . "</div>";
+                echo "<script>alert('Image size too large. Max 4MB allowed.');</script>";
             }
         } else {
-            echo "<div class='alert alert-danger mt-3'>Error creating user account: " . mysqli_error($conn) . "</div>";
+            echo "<script>alert('Only JPG, JPEG, PNG files allowed.');</script>";
         }
     }
 }
 ?>
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,8 +89,8 @@ if (isset($_POST['create'])) { // Matches button name in HTML
     <div class="card-description">Fill in your details to sign up</div>
   </div>
 
-  <!-- Form -->
-  <form action="" method="POST">
+  <!-- IMPORTANT: Fixed action, method, enctype -->
+  <form action="" method="POST" enctype="multipart/form-data">
 
     <!-- Full Name -->
     <div class="form-group">
@@ -125,6 +147,15 @@ if (isset($_POST['create'])) { // Matches button name in HTML
       <div class="input-wrapper">
         <span class="input-icon"><i class="fas fa-lock"></i></span>
         <input type="password" name="password" placeholder="Enter your password" required />
+      </div>
+    </div>
+
+    <!-- Profile Photo -->
+    <div class="form-group">
+      <label class="form-label">Profile Photo</label>
+      <div class="input-wrapper">
+        <span class="input-icon"><i class="fas fa-camera"></i></span>
+        <input type="file" name="profile_photo" accept="image/*" />
       </div>
     </div>
 

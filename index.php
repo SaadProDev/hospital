@@ -47,7 +47,7 @@
     <div class="content">
         <h3>we take care of your healthy life</h3>
         <p> A person who has good physical health is likely to have bodily functions and processes working at their peak.</p>
-        <a href="./appointment.php" class="btn"> appointment us <span class="fas fa-chevron-right"></span> </a>
+        <a href="./appointment.php" class="btn"> Appointment <span class="fas fa-chevron-right"></span> </a>
     </div>
 
 </section>

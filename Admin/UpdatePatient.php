@@ -135,20 +135,20 @@ if (isset($_POST['btn'])) {
         <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="./ViewPatient.php">View Patients</a></li>
-        <li><a href="./logout.php">Logout</a></li>
+        <li><a href="#">Manage Logins</a></li>
       </ul>
     </aside>
 
     <div class="profile-card">
       <h3 class="mb-4 text-center">Update Patient</h3>
       <form method="POST" enctype="multipart/form-data">
-        <!-- <div class="text-center mb-4">
+        <div class="text-center mb-4">
           <img src="../upload/<?php echo $patient['profile_photo']; ?>" 
                onerror="this.onerror=null;this.src='default.jpg';" 
                class="profile-img" alt="Profile Photo"><br>
           <label class="form-label">Profile Photo</label><br>
           <input type="file" name="imgupld"><br><br>
-        </div> -->
+        </div>
 
         <label class="form-label">Full Name</label>
         <input type="text" class="form-control" name="FullName" value="<?php echo $patient['full_name']; ?>" required>

@@ -1,91 +1,145 @@
 <?php
+/* 
+========================================
+DOCTOR AVAILABILITY SYSTEM - BEGINNER VERSION
+========================================
+This code helps doctors set their weekly availability schedule.
+Doctors can choose which days they work and what times they're available.
+*/
+
+// Step 1: Start the session (this lets us know who is logged in)
 session_start();
-$conn = mysqli_connect("localhost", "root", "", "hospital");
-if (!$conn) {
-    die("❌ Database connection failed: " . mysqli_connect_error());
+
+// Step 2: Connect to the database
+$database_connection = mysqli_connect("localhost", "root", "", "hospital");
+
+// Check if database connection worked
+if (!$database_connection) {
+    die("❌ Could not connect to database: " . mysqli_connect_error());
 }
+
+// Step 3: Security check - Make sure only doctors can access this page
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'doctor') {
+    // If not a doctor, send them back to login page
     header("Location: ../login.php");
     exit();
 }
-$doctor_username = $_SESSION['username'];
-$message = "";
 
+// Step 4: Get the doctor's username from the session
+$logged_in_doctor = $_SESSION['username'];
+
+// Step 5: Create a variable to show messages to the user
+$user_message = "";
+
+// Step 6: Check if the form was submitted (user clicked the Save button)
 if (isset($_POST['save_availability'])) {
-    $days_selected = isset($_POST['days_of_week']) ? $_POST['days_of_week'] : [];
+    
+    // Get the information from the form
+    $selected_days = isset($_POST['days_of_week']) ? $_POST['days_of_week'] : []; // This is now an array!
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
-
-    if (empty($days_selected) || empty($start_time) || empty($end_time)) {
-        $message = "⚠️ Please select at least one day and fill out the time fields!";
+    
+    // Make sure all fields are filled out
+    if (empty($selected_days) || empty($start_time) || empty($end_time)) {
+        $user_message = "⚠️ Please select at least one day and fill out the time fields!";
     }
-    elseif ($start_time >= $end_time) {
-        $message = "⚠️ Start time must be earlier than end time!";
+    // Check if start time is before end time
+    else if ($start_time >= $end_time) {
+        $user_message = "⚠️ Start time must be earlier than end time!";
     }
     else {
-        $success = [];
-        $duplicates = [];
-        $errors = [];
-
-        foreach ($days_selected as $day) {
-            $check_sql = "SELECT * FROM doctor_availability
-                          WHERE doctor_username='$doctor_username'
-                          AND day_of_week='$day'
-                          AND start_time='$start_time'
-                          AND end_time='$end_time'";
-            $check_result = mysqli_query($conn, $check_sql);
-
+        // We'll keep track of results for each day
+        $successful_days = [];
+        $duplicate_days = [];
+        $error_days = [];
+        
+        // Loop through each selected day
+        foreach ($selected_days as $selected_day) {
+            
+            // Check if doctor already has availability at this time on this day
+            $check_query = "SELECT * FROM doctor_availability 
+                           WHERE doctor_username = '$logged_in_doctor' 
+                           AND day_of_week = '$selected_day' 
+                           AND start_time = '$start_time' 
+                           AND end_time = '$end_time'";
+            
+            $check_result = mysqli_query($database_connection, $check_query);
+            
+            // If we found a matching record, it means it already exists
             if (mysqli_num_rows($check_result) > 0) {
-                $duplicates[] = $day;
+                $duplicate_days[] = $selected_day;
             }
             else {
-                $insert_sql = "INSERT INTO doctor_availability (doctor_username, day_of_week, start_time, end_time)
-                               VALUES ('$doctor_username', '$day', '$start_time', '$end_time')";
-
-                if (mysqli_query($conn, $insert_sql)) {
-                    $success[] = $day;
+                // Try to save this day to database
+                $save_query = "INSERT INTO doctor_availability (doctor_username, day_of_week, start_time, end_time) 
+                              VALUES ('$logged_in_doctor', '$selected_day', '$start_time', '$end_time')";
+                
+                if (mysqli_query($database_connection, $save_query)) {
+                    $successful_days[] = $selected_day;
                 } else {
-                    $errors[] = $day;
+                    $error_days[] = $selected_day;
                 }
             }
         }
-
-        if (!empty($success)) {
-            $message .= "✅ Added for: " . implode(", ", $success) . "<br>";
+        
+        // Create a message based on the results
+        $message_parts = [];
+        
+        if (!empty($successful_days)) {
+            $message_parts[] = "✅ Successfully added availability for: " . implode(', ', $successful_days);
         }
-        if (!empty($duplicates)) {
-            $message .= "⚠️ Already exists: " . implode(", ", $duplicates) . "<br>";
+        
+        if (!empty($duplicate_days)) {
+            $message_parts[] = "⚠️ Already exists for: " . implode(', ', $duplicate_days);
         }
-        if (!empty($errors)) {
-            $message .= "❌ Error for: " . implode(", ", $errors);
+        
+        if (!empty($error_days)) {
+            $message_parts[] = "❌ Error saving for: " . implode(', ', $error_days);
         }
+        
+        $user_message = implode('<br>', $message_parts);
     }
 }
 
+// Step 7: Handle deleting availability (if user clicked delete button)
 if (isset($_POST['delete_availability'])) {
-    $id_to_delete = $_POST['availability_id'];
-    $delete_sql = "DELETE FROM doctor_availability
-                   WHERE id='$id_to_delete' AND doctor_username='$doctor_username'";
-    if (mysqli_query($conn, $delete_sql)) {
-        $message = "✅ Availability deleted!";
+    $availability_id = $_POST['availability_id'];
+    
+    $delete_query = "DELETE FROM doctor_availability 
+                    WHERE id = '$availability_id' 
+                    AND doctor_username = '$logged_in_doctor'";
+    
+    if (mysqli_query($database_connection, $delete_query)) {
+        $user_message = "✅ Availability deleted successfully!";
     } else {
-        $message = "❌ Could not delete: " . mysqli_error($conn);
+        $user_message = "❌ Error deleting availability: " . mysqli_error($database_connection);
     }
 }
 
-$sql = "SELECT * FROM doctor_availability
-        WHERE doctor_username='$doctor_username'
-        ORDER BY FIELD(day_of_week, 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'),
-        start_time";
-$result = mysqli_query($conn, $sql);
+// Step 8: Get all current availability for this doctor to show in the table
+$get_availability_query = "SELECT * FROM doctor_availability 
+                          WHERE doctor_username = '$logged_in_doctor' 
+                          ORDER BY FIELD(day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), 
+                          start_time";
 
-$days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+$availability_results = mysqli_query($database_connection, $get_availability_query);
 
-function to12Hour($time) {
-    return date('g:i A', strtotime($time));
+// Step 9: Create an array of days for the dropdown menu
+$days_of_week = [
+    'Monday',
+    'Tuesday', 
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+];
+
+// Function to convert 24-hour time to 12-hour time (like 14:00 to 2:00 PM)
+function convert_to_12_hour_format($time_24_hour) {
+    return date('g:i A', strtotime($time_24_hour));
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
