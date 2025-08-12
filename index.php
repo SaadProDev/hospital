@@ -26,7 +26,7 @@
         <a href="./about.php">about</a>
         <a href="./doctors.php">doctors</a>
         <a href="./appointment.php">appointment</a>
-        <a href="./news.php">news</a>
+        <!-- <a href="./news.php">news</a> -->
         <!-- <a href="admin/admin.php" class="admin-panel">admin panel</a> -->
         <a href="./login.php" class="log-in-button">Login</a>
     </nav>
