@@ -22,24 +22,14 @@ if (isset($_GET['id'])) {
 }
 
 if (isset($_POST['btn'])) {
-    $new_username = $_POST['UserName'];
     $FullName     = $_POST['FullName'];
     $Email        = $_POST['Email'];
     $Phone        = $_POST['Phone'];
     $City         = $_POST['city_name'];
     $Password     = $_POST['Password']; // New password
 
-    // Check for duplicate username in users (excluding current)
-    $checkUser = "SELECT * FROM users WHERE username = '$new_username' AND username != '$current_username'";
-    $userExists = mysqli_query($conn, $checkUser);
-
-    if (mysqli_num_rows($userExists) > 0) {
-        echo "<script>alert('Username already exists. Choose another.');</script>";
-        exit;
-    }
-
     // Handle profile photo upload (optional)
-    if (!empty($_FILES['imgupld']['name'])) {
+    if ($_FILES['imgupld']['name'] != '') {
         $pfp      = $_FILES['imgupld']['name'];
         $tmp_name = $_FILES['imgupld']['tmp_name'];
         $type     = strtolower($_FILES['imgupld']['type']);
@@ -52,7 +42,6 @@ if (isset($_POST['btn'])) {
             if ($size <= 4000000) {
                 move_uploaded_file($tmp_name, $folder);
                 $updatePatient = "UPDATE patients SET 
-                    username = '$new_username', 
                     full_name = '$FullName', 
                     email = '$Email', 
                     phone = '$Phone', 
@@ -70,7 +59,6 @@ if (isset($_POST['btn'])) {
     } else {
         // Update without changing profile photo
         $updatePatient = "UPDATE patients SET 
-            username = '$new_username', 
             full_name = '$FullName', 
             email = '$Email', 
             phone = '$Phone', 
@@ -79,17 +67,17 @@ if (isset($_POST['btn'])) {
     }
 
     // Update Users Table
-    if (!empty($Password)) {
-        $updateUser = "UPDATE users SET username = '$new_username', password = '$Password' WHERE username = '$current_username'";
+    if ($Password != '') {
+        $updateUser = "UPDATE users SET password = '$Password' WHERE username = '$current_username'";
     } else {
-        $updateUser = "UPDATE users SET username = '$new_username' WHERE username = '$current_username'";
+        $updateUser = "UPDATE users SET username = '$current_username' WHERE username = '$current_username'";
     }
 
     $runUser    = mysqli_query($conn, $updateUser);
     $runPatient = mysqli_query($conn, $updatePatient);
 
     if ($runUser && $runPatient) {
-        echo "<script>alert('Patient updated successfully!'); window.location.href='ViewPatients.php';</script>";
+        echo "<script>alert('Patient updated successfully!'); window.location.href='ViewPatient.php';</script>";
     } else {
         echo "<script>alert('Error updating patient: " . mysqli_error($conn) . "');</script>";
     }
@@ -135,7 +123,7 @@ if (isset($_POST['btn'])) {
         <li><a href="./ViewCity.php">View Cities</a></li>
         <li><a href="./ReadDoctor.php">View Doctors</a></li>
         <li><a href="./ViewPatient.php">View Patients</a></li>
-        <li><a href="#">Manage Logins</a></li>
+        <li><a href="./logout.php">Logout</a></li>
       </ul>
     </aside>
 
@@ -153,9 +141,6 @@ if (isset($_POST['btn'])) {
         <label class="form-label">Full Name</label>
         <input type="text" class="form-control" name="FullName" value="<?php echo $patient['full_name']; ?>" required>
 
-        <label class="form-label">Username</label>
-        <input type="text" class="form-control" name="UserName" value="<?php echo $patient['username']; ?>" required>
-
         <label class="form-label">Password <small>(Leave blank to keep existing)</small></label>
         <input type="password" class="form-control" name="Password">
 
@@ -166,15 +151,14 @@ if (isset($_POST['btn'])) {
         <input type="text" class="form-control" name="Phone" value="<?php echo $patient['phone']; ?>" required>
 
         <label class="form-label">City</label>
-<select name="city_name" class="form-control" required>
-    <option value="" disabled>Select your city</option>
-    <option value="Abbottabad" <?php if($patient['city'] == 'Abbottabad') echo 'selected'; ?>>Abbottabad</option>
-    <option value="Bahawalpur" <?php if($patient['city'] == 'Bahawalpur') echo 'selected'; ?>>Bahawalpur</option>
-    <option value="Karachi" <?php if($patient['city'] == 'Karachi') echo 'selected'; ?>>Karachi</option>
-    <option value="Lahore" <?php if($patient['city'] == 'Lahore') echo 'selected'; ?>>Lahore</option>
-    <option value="Multan" <?php if($patient['city'] == 'Multan') echo 'selected'; ?>>Multan</option>
-</select>
-
+        <select name="city_name" class="form-control" required>
+            <option value="" disabled>Select your city</option>
+            <option value="Abbottabad" <?php if($patient['city'] == 'Abbottabad') echo 'selected'; ?>>Abbottabad</option>
+            <option value="Bahawalpur" <?php if($patient['city'] == 'Bahawalpur') echo 'selected'; ?>>Bahawalpur</option>
+            <option value="Karachi" <?php if($patient['city'] == 'Karachi') echo 'selected'; ?>>Karachi</option>
+            <option value="Lahore" <?php if($patient['city'] == 'Lahore') echo 'selected'; ?>>Lahore</option>
+            <option value="Multan" <?php if($patient['city'] == 'Multan') echo 'selected'; ?>>Multan</option>
+        </select>
 
         <button type="submit" name="btn" class="btn btn-primary w-100 mt-4">Update Patient</button>
       </form>

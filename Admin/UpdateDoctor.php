@@ -79,8 +79,6 @@ if (isset($_POST['btn'])) {
 </head>
 <body>
 
-    
-
 <div class="admin-container">
     <aside class="sidebar">
       <a href="./Admin.php"><h2>Admin Panel</h2></a>
@@ -100,53 +98,52 @@ if (isset($_POST['btn'])) {
 
     <form method="POST" enctype="multipart/form-data">
       <div class="text-center mb-4">
-    <img src="../upload/<?php echo $doctor['profile_photo']; ?>" class="profile-img" alt="Profile Photo"><br>
-    <label class="form-label">Profile Photo</label><br>
-    <input type="file" name="imgupld"><br><br>
-</div>
+        <img src="../upload/<?php echo $doctor['profile_photo']; ?>" class="profile-img" alt="Profile Photo"><br>
+        <label class="form-label">Profile Photo</label><br>
+        <input type="file" name="imgupld"><br><br>
+      </div>
 
       <label class="form-label">Full Name</label>
-            <input type="text" class="form-control" name="FullName" value="<?php echo $doctor['full_name']; ?>" required>
+      <input type="text" class="form-control" name="FullName" value="<?php echo $doctor['full_name']; ?>" required>
 
-      <label class="form-label">Username</label>
-            <input type="text" class="form-control" value="<?php echo $doctor['username']; ?>" readonly>
+      <!-- Username field removed -->
 
       <label class="form-label">Email</label>
-            <input type="email" class="form-control" name="Email" value="<?php echo $doctor['email']; ?>" required>
+      <input type="email" class="form-control" name="Email" value="<?php echo $doctor['email']; ?>" required>
 
       <label class="form-label">Phone</label>
-            <input type="text" class="form-control" name="Phone" value="<?php echo $doctor['phone']; ?>" required>
+      <input type="text" class="form-control" name="Phone" value="<?php echo $doctor['phone']; ?>" required>
 
       <label for="city_id" class="form-label">City</label>
-       <select class="form-select" name="city_id" id="city_id" required>
-                <option value="Lahore" <?php if($doctor['city'] == 'Lahore') echo 'selected'; ?>>Lahore</option>
-                <option value="Karachi" <?php if($doctor['city'] == 'Karachi') echo 'selected'; ?>>Karachi</option>
-                <option value="Islamabad" <?php if($doctor['city'] == 'Islamabad') echo 'selected'; ?>>Islamabad</option>
-            </select> 
+      <select class="form-select" name="city_id" id="city_id" required>
+          <option value="Lahore" <?php if($doctor['city'] == 'Lahore') echo 'selected'; ?>>Lahore</option>
+          <option value="Karachi" <?php if($doctor['city'] == 'Karachi') echo 'selected'; ?>>Karachi</option>
+          <option value="Islamabad" <?php if($doctor['city'] == 'Islamabad') echo 'selected'; ?>>Islamabad</option>
+      </select> 
 
       <div class="mb-3">
         <label class="form-label">Specialist</label>
-            <select class="form-select" name="speciality" required>
-                <option value="Dermatology" <?php if($doctor['specialist'] == 'Dermatology') echo 'selected'; ?>>Dermatology</option>
-                <option value="Oncologist" <?php if($doctor['specialist'] == 'Oncologist') echo 'selected'; ?>>Oncologist</option>
-                <option value="Cardiologist" <?php if($doctor['specialist'] == 'Cardiologist') echo 'selected'; ?>>Cardiologist</option>
-                <option value="Gastroenterology" <?php if($doctor['specialist'] == 'Gastroenterology') echo 'selected'; ?>>Gastroenterology</option>
-                <option value="Neurologist" <?php if($doctor['specialist'] == 'Neurologist') echo 'selected'; ?>>Neurologist</option>
-                <option value="Anesthesiology" <?php if($doctor['specialist'] == 'Anesthesiology') echo 'selected'; ?>>Anesthesiology</option>
-                <option value="Psychiatry" <?php if($doctor['specialist'] == 'Psychiatry') echo 'selected'; ?>>Psychiatry</option>
-                <option value="Family medicine" <?php if($doctor['specialist'] == 'Family medicine') echo 'selected'; ?>>Family medicine</option>
-                <option value="Ophthalmologist" <?php if($doctor['specialist'] == 'Ophthalmologist') echo 'selected'; ?>>Ophthalmologist</option>
-                <option value="Pediatrics" <?php if($doctor['specialist'] == 'Pediatrics') echo 'selected'; ?>>Pediatrics</option>
-            </select>
+        <select class="form-select" name="speciality" required>
+            <option value="Dermatology" <?php if($doctor['specialist'] == 'Dermatology') echo 'selected'; ?>>Dermatology</option>
+            <option value="Oncologist" <?php if($doctor['specialist'] == 'Oncologist') echo 'selected'; ?>>Oncologist</option>
+            <option value="Cardiologist" <?php if($doctor['specialist'] == 'Cardiologist') echo 'selected'; ?>>Cardiologist</option>
+            <option value="Gastroenterology" <?php if($doctor['specialist'] == 'Gastroenterology') echo 'selected'; ?>>Gastroenterology</option>
+            <option value="Neurologist" <?php if($doctor['specialist'] == 'Neurologist') echo 'selected'; ?>>Neurologist</option>
+            <option value="Anesthesiology" <?php if($doctor['specialist'] == 'Anesthesiology') echo 'selected'; ?>>Anesthesiology</option>
+            <option value="Psychiatry" <?php if($doctor['specialist'] == 'Psychiatry') echo 'selected'; ?>>Psychiatry</option>
+            <option value="Family medicine" <?php if($doctor['specialist'] == 'Family medicine') echo 'selected'; ?>>Family medicine</option>
+            <option value="Ophthalmologist" <?php if($doctor['specialist'] == 'Ophthalmologist') echo 'selected'; ?>>Ophthalmologist</option>
+            <option value="Pediatrics" <?php if($doctor['specialist'] == 'Pediatrics') echo 'selected'; ?>>Pediatrics</option>
+        </select>
       </div>
 
       <label class="form-label mt-3">Profile</label>
-            <textarea class="form-control" name="Profile" rows="4" required><?php echo $doctor['profile_description']; ?></textarea>
+      <textarea class="form-control" name="Profile" rows="4" required><?php echo $doctor['profile_description']; ?></textarea>
 
       <button type="submit" name="btn" class="btn btn-primary w-100">Update Doctor</button>
     </form>
   </div>
-  </div>
+</div>
 
 </body>
 </html>
