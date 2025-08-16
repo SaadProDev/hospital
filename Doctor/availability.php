@@ -1,62 +1,51 @@
 <?php
-/* 
-========================================
-DOCTOR AVAILABILITY SYSTEM - BEGINNER VERSION
-========================================
-This code helps doctors set their weekly availability schedule.
-Doctors can choose which days they work and what times they're available.
-*/
 
-// Step 1: Start the session (this lets us know who is logged in)
 session_start();
 
-// Step 2: Connect to the database
 $database_connection = mysqli_connect("localhost", "root", "", "hospital");
 
-// Check if database connection worked
+
 if (!$database_connection) {
     die("❌ Could not connect to database: " . mysqli_connect_error());
 }
 
-// Step 3: Security check - Make sure only doctors can access this page
+
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'doctor') {
-    // If not a doctor, send them back to login page
+    
     header("Location: ../login.php");
     exit();
 }
 
-// Step 4: Get the doctor's username from the session
+
 $logged_in_doctor = $_SESSION['username'];
 
-// Step 5: Create a variable to show messages to the user
+
 $user_message = "";
 
-// Step 6: Check if the form was submitted (user clicked the Save button)
 if (isset($_POST['save_availability'])) {
     
-    // Get the information from the form
-    $selected_days = isset($_POST['days_of_week']) ? $_POST['days_of_week'] : []; // This is now an array!
+
+    $selected_days = isset($_POST['days_of_week']) ? $_POST['days_of_week'] : []; 
     $start_time = $_POST['start_time'];
     $end_time = $_POST['end_time'];
     
-    // Make sure all fields are filled out
+
     if (empty($selected_days) || empty($start_time) || empty($end_time)) {
         $user_message = "⚠️ Please select at least one day and fill out the time fields!";
     }
-    // Check if start time is before end time
+    
     else if ($start_time >= $end_time) {
         $user_message = "⚠️ Start time must be earlier than end time!";
     }
     else {
-        // We'll keep track of results for each day
+        
         $successful_days = [];
         $duplicate_days = [];
         $error_days = [];
-        
-        // Loop through each selected day
+
         foreach ($selected_days as $selected_day) {
             
-            // Check if doctor already has availability at this time on this day
+
             $check_query = "SELECT * FROM doctor_availability 
                            WHERE doctor_username = '$logged_in_doctor' 
                            AND day_of_week = '$selected_day' 
@@ -65,12 +54,12 @@ if (isset($_POST['save_availability'])) {
             
             $check_result = mysqli_query($database_connection, $check_query);
             
-            // If we found a matching record, it means it already exists
+            
             if (mysqli_num_rows($check_result) > 0) {
                 $duplicate_days[] = $selected_day;
             }
             else {
-                // Try to save this day to database
+                
                 $save_query = "INSERT INTO doctor_availability (doctor_username, day_of_week, start_time, end_time) 
                               VALUES ('$logged_in_doctor', '$selected_day', '$start_time', '$end_time')";
                 
@@ -82,7 +71,7 @@ if (isset($_POST['save_availability'])) {
             }
         }
         
-        // Create a message based on the results
+
         $message_parts = [];
         
         if (!empty($successful_days)) {
@@ -101,7 +90,6 @@ if (isset($_POST['save_availability'])) {
     }
 }
 
-// Step 7: Handle deleting availability (if user clicked delete button)
 if (isset($_POST['delete_availability'])) {
     $availability_id = $_POST['availability_id'];
     
@@ -116,7 +104,7 @@ if (isset($_POST['delete_availability'])) {
     }
 }
 
-// Step 8: Get all current availability for this doctor to show in the table
+
 $get_availability_query = "SELECT * FROM doctor_availability 
                           WHERE doctor_username = '$logged_in_doctor' 
                           ORDER BY FIELD(day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), 
@@ -124,7 +112,7 @@ $get_availability_query = "SELECT * FROM doctor_availability
 
 $availability_results = mysqli_query($database_connection, $get_availability_query);
 
-// Step 9: Create an array of days for the dropdown menu
+
 $days_of_week = [
     'Monday',
     'Tuesday', 
@@ -135,7 +123,6 @@ $days_of_week = [
     'Sunday'
 ];
 
-// Function to convert 24-hour time to 12-hour time (like 14:00 to 2:00 PM)
 function convert_to_12_hour_format($time_24_hour) {
     return date('g:i A', strtotime($time_24_hour));
 }
@@ -524,91 +511,6 @@ h1{
         <a href="./index.php" class="back-link">← Back to Dashboard</a>
     </div>
 
-    <!-- Simple JavaScript for better user experience -->
-    <script>
-        // This function runs when the page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // Get references to the time input fields
-            const startTimeInput = document.getElementById('start_time');
-            const endTimeInput = document.getElementById('end_time');
-            const dayCheckboxes = document.querySelectorAll('input[name="days_of_week[]"]');
-            
-            // When start time changes, make sure end time is after it
-            startTimeInput.addEventListener('change', function() {
-                if (startTimeInput.value && endTimeInput.value) {
-                    if (startTimeInput.value >= endTimeInput.value) {
-                        alert('⚠️ Start time must be before end time!');
-                        startTimeInput.focus();
-                    }
-                }
-            });
-            
-            // When end time changes, make sure it's after start time
-            endTimeInput.addEventListener('change', function() {
-                if (startTimeInput.value && endTimeInput.value) {
-                    if (endTimeInput.value <= startTimeInput.value) {
-                        alert('⚠️ End time must be after start time!');
-                        endTimeInput.focus();
-                    }
-                }
-            });
-            
-            // Add "Select All" and "Clear All" functionality
-            const daysContainer = document.querySelector('.days-container');
-            
-            // Create helper buttons
-            const helperButtons = document.createElement('div');
-            helperButtons.style.textAlign = 'center';
-            helperButtons.style.marginBottom = '15px';
-            helperButtons.innerHTML = `
-                <button type="button" id="selectAll" style="background: #27ae60; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin: 0 5px; cursor: pointer;">
-                    ✓ Select All Days
-                </button>
-                <button type="button" id="clearAll" style="background: #e74c3c; color: white; border: none; padding: 8px 15px; border-radius: 5px; margin: 0 5px; cursor: pointer;">
-                    ✗ Clear All Days
-                </button>
-            `;
-            
-            daysContainer.parentNode.insertBefore(helperButtons, daysContainer);
-            
-            // Select All button functionality
-            document.getElementById('selectAll').addEventListener('click', function() {
-                dayCheckboxes.forEach(checkbox => {
-                    checkbox.checked = true;
-                });
-            });
-            
-            // Clear All button functionality
-            document.getElementById('clearAll').addEventListener('click', function() {
-                dayCheckboxes.forEach(checkbox => {
-                    checkbox.checked = false;
-                });
-            });
-            
-            // Form validation before submit
-            document.querySelector('form').addEventListener('submit', function(e) {
-                const checkedDays = document.querySelectorAll('input[name="days_of_week[]"]:checked');
-                
-                if (checkedDays.length === 0) {
-                    e.preventDefault();
-                    alert('⚠️ Please select at least one day of the week!');
-                    return false;
-                }
-                
-                if (!startTimeInput.value || !endTimeInput.value) {
-                    e.preventDefault();
-                    alert('⚠️ Please fill in both start and end times!');
-                    return false;
-                }
-                
-                if (startTimeInput.value >= endTimeInput.value) {
-                    e.preventDefault();
-                    alert('⚠️ Start time must be before end time!');
-                    return false;
-                }
-            });
-        });
-    </script>
+    <script src="./availabilty.js"></script>
 </body>
 </html>
