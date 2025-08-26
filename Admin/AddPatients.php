@@ -103,7 +103,7 @@ if (isset($_POST['btn'])) {
             <input type="text" class="form-control" name="FullName" required>
 
             <label class="form-label">Username</label>
-            <input type="text" class="form-control" name="UserName" required>
+            <input type="text" class="form-control" name="UserName" placeholder="Username cannot be changed once set" required>
 
             <label class="form-label">Password</label>
             <input type="password" class="form-control" name="Password" required>

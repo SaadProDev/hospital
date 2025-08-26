@@ -1,4 +1,5 @@
 <?php
+<<<<<<< HEAD
 session_start();
 $conn = mysqli_connect("localhost", "root", "", "hospital");
 if (!$conn) {
@@ -6,10 +7,26 @@ if (!$conn) {
 }
 
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'doctor') {
+=======
+
+session_start();
+
+$database_connection = mysqli_connect("localhost", "root", "", "hospital");
+
+
+if (!$database_connection) {
+    die("❌ Could not connect to database: " . mysqli_connect_error());
+}
+
+
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'doctor') {
+    
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
     header("Location: ../login.php");
     exit();
 }
 
+<<<<<<< HEAD
 $doctor_username = $_SESSION['username'];
 $message = "";
 
@@ -38,23 +55,82 @@ if (isset($_POST['save_availability'])) {
                           AND end_time='$end_time'";
             $check_result = mysqli_query($conn, $check_sql);
 
+=======
+
+$logged_in_doctor = $_SESSION['username'];
+
+
+$user_message = "";
+
+if (isset($_POST['save_availability'])) {
+    
+
+    $selected_days = isset($_POST['days_of_week']) ? $_POST['days_of_week'] : []; 
+    $start_time = $_POST['start_time'];
+    $end_time = $_POST['end_time'];
+    
+
+    if (empty($selected_days) || empty($start_time) || empty($end_time)) {
+        $user_message = "⚠️ Please select at least one day and fill out the time fields!";
+    }
+    
+    else if ($start_time >= $end_time) {
+        $user_message = "⚠️ Start time must be earlier than end time!";
+    }
+    else {
+        
+        $successful_days = [];
+        $duplicate_days = [];
+        $error_days = [];
+
+        foreach ($selected_days as $selected_day) {
+            
+
+            $check_query = "SELECT * FROM doctor_availability 
+                           WHERE doctor_username = '$logged_in_doctor' 
+                           AND day_of_week = '$selected_day' 
+                           AND start_time = '$start_time' 
+                           AND end_time = '$end_time'";
+            
+            $check_result = mysqli_query($database_connection, $check_query);
+            
+            
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
             if (mysqli_num_rows($check_result) > 0) {
                 $duplicates[] = $day;
             }
             else {
+<<<<<<< HEAD
                 $insert_sql = "INSERT INTO doctor_availability (doctor_username, day_of_week, start_time, end_time)
                                VALUES ('$doctor_username', '$day', '$start_time', '$end_time')";
 
                 if (mysqli_query($conn, $insert_sql)) {
                     $success[] = $day;
+=======
+                
+                $save_query = "INSERT INTO doctor_availability (doctor_username, day_of_week, start_time, end_time) 
+                              VALUES ('$logged_in_doctor', '$selected_day', '$start_time', '$end_time')";
+                
+                if (mysqli_query($database_connection, $save_query)) {
+                    $successful_days[] = $selected_day;
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
                 } else {
                     $errors[] = $day;
                 }
             }
         }
+<<<<<<< HEAD
 
         if (!empty($success)) {
             $message .= "✅ Added for: " . implode(", ", $success) . "<br>";
+=======
+        
+
+        $message_parts = [];
+        
+        if (!empty($successful_days)) {
+            $message_parts[] = "✅ Successfully added availability for: " . implode(', ', $successful_days);
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
         }
         if (!empty($duplicates)) {
             $message .= "⚠️ Already exists: " . implode(", ", $duplicates) . "<br>";
@@ -65,7 +141,10 @@ if (isset($_POST['save_availability'])) {
     }
 }
 
+<<<<<<< HEAD
 // Delete availability
+=======
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
 if (isset($_POST['delete_availability'])) {
     $id_to_delete = $_POST['availability_id'];
     $delete_sql = "DELETE FROM doctor_availability
@@ -77,17 +156,41 @@ if (isset($_POST['delete_availability'])) {
     }
 }
 
+<<<<<<< HEAD
 // Get availability list
 $sql = "SELECT * FROM doctor_availability
         WHERE doctor_username='$doctor_username'
         ORDER BY FIELD(day_of_week, 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'),
         start_time";
 $result = mysqli_query($conn, $sql);
+=======
+
+$get_availability_query = "SELECT * FROM doctor_availability 
+                          WHERE doctor_username = '$logged_in_doctor' 
+                          ORDER BY FIELD(day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'), 
+                          start_time";
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
 
 $days_of_week = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
+<<<<<<< HEAD
 function to12Hour($time) {
     return date('g:i A', strtotime($time));
+=======
+
+$days_of_week = [
+    'Monday',
+    'Tuesday', 
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday'
+];
+
+function convert_to_12_hour_format($time_24_hour) {
+    return date('g:i A', strtotime($time_24_hour));
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
 }
 ?>
 
@@ -292,6 +395,7 @@ function to12Hour($time) {
         </form>
     </div>
 
+<<<<<<< HEAD
     <h2>📋 Your Current Weekly Schedule</h2>
 
     <?php if (mysqli_num_rows($result) > 0): ?>
@@ -368,5 +472,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 </script>
+=======
+    <script src="./availabilty.js"></script>
+>>>>>>> 2b04d50fd4b0b60a494dcf97b199b9476d4d74d0
 </body>
 </html>
